@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { useData } from '../contexts/DataContext'
 import Sidebar from '../components/Sidebar'
@@ -9,7 +9,7 @@ import AnalyticsPanel from '../components/AnalyticsPanel'
 import { Compilation } from '../contexts/DataContext'
 
 export default function Dashboard() {
-  const { user } = useAuth()
+  const { } = useAuth()
   const { compilations, loading } = useData()
   const [selectedCompilation, setSelectedCompilation] = useState<Compilation | null>(null)
   const [activeView, setActiveView] = useState<'compilations' | 'analytics'>('compilations')

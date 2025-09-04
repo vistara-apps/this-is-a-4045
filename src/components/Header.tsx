@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Search, Bell, Download } from 'lucide-react'
 
 export default function Header() {

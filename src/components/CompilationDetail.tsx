@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useData, Compilation } from '../contexts/DataContext'
 import { formatDistanceToNow } from 'date-fns'
 import { ArrowLeft, Download, ExternalLink, Copy, Check } from 'lucide-react'
