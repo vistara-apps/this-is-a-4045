@@ -1,12 +1,9 @@
-
 import { useAuth } from '../contexts/AuthContext'
 import { useData } from '../contexts/DataContext'
 import { 
   BookOpen, 
-  Home, 
   FileText, 
   BarChart3, 
-  Settings, 
   LogOut, 
   Crown,
   Plus

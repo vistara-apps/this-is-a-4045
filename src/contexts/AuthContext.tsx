@@ -63,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Listen for auth changes
     if (!features.mockData) {
-      const { data: { subscription } } = auth.onAuthStateChange(async (event, session) => {
+      const { data: { subscription } } = auth.onAuthStateChange(async (_, session) => {
         setUser(session?.user ?? null)
         
         if (session?.user) {
@@ -107,7 +107,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const mockUser = {
             id: '1',
             email: 'demo@redditscribe.com',
-            user_metadata: { subscription_status: 'premium' }
+            user_metadata: { subscription_status: 'premium' },
+            app_metadata: {},
+            aud: 'authenticated',
+            created_at: new Date().toISOString()
           } as User
           setUser(mockUser)
           setUserProfile({ subscription_status: 'premium' })
@@ -140,7 +143,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const mockUser = {
           id: Date.now().toString(),
           email,
-          user_metadata: { subscription_status: 'free' }
+          user_metadata: { subscription_status: 'free' },
+          app_metadata: {},
+          aud: 'authenticated',
+          created_at: new Date().toISOString()
         } as User
         setUser(mockUser)
         setUserProfile({ subscription_status: 'free' })

@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Database } from './database.types'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co'
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-key'
@@ -9,7 +8,7 @@ if (typeof window !== 'undefined' && (!import.meta.env.VITE_SUPABASE_URL || !imp
   console.warn('Missing Supabase environment variables - using mock data')
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
@@ -88,7 +87,7 @@ export const db = {
     return data
   },
 
-  updateUserProfile: async (userId: string, updates: any) => {
+  updateUserProfile: async (userId: string, updates: Record<string, any>) => {
     const { data, error } = await supabase
       .from('users')
       .update(updates)
@@ -130,7 +129,7 @@ export const db = {
     return data
   },
 
-  updateCompilation: async (compilationId: string, updates: any) => {
+  updateCompilation: async (compilationId: string, updates: Record<string, any>) => {
     const { data, error } = await supabase
       .from('compilations')
       .update(updates)
@@ -160,10 +159,13 @@ export const db = {
   }) => {
     const { data, error } = await supabase
       .from('snippets')
-      .insert({
-        ...snippet,
+      .insert([{
+        compilation_id: snippet.compilation_id,
+        text: snippet.text,
+        source_url: snippet.source_url,
+        metadata: snippet.metadata,
         created_at: new Date().toISOString()
-      })
+      }])
       .select()
       .single()
     
@@ -171,7 +173,7 @@ export const db = {
     return data
   },
 
-  updateSnippet: async (snippetId: string, updates: any) => {
+  updateSnippet: async (snippetId: string, updates: Record<string, any>) => {
     const { data, error } = await supabase
       .from('snippets')
       .update(updates)
@@ -211,7 +213,7 @@ export const db = {
 
 // Real-time subscriptions
 export const realtime = {
-  subscribeToCompilations: (userId: string, callback: (payload: any) => void) => {
+  subscribeToCompilations: (userId: string, callback: (payload: Record<string, any>) => void) => {
     return supabase
       .channel('compilations')
       .on(
@@ -227,7 +229,7 @@ export const realtime = {
       .subscribe()
   },
 
-  subscribeToSnippets: (compilationId: string, callback: (payload: any) => void) => {
+  subscribeToSnippets: (compilationId: string, callback: (payload: Record<string, any>) => void) => {
     return supabase
       .channel('snippets')
       .on(

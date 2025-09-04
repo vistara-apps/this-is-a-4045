@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import { db, realtime } from '../lib/supabase'
 import { useAuth } from './AuthContext'
 import { features } from '../config/environment'
-import type { CompilationWithSnippets, Snippet, SnippetMetadata } from '../lib/database.types'
+import type { CompilationWithSnippets, SnippetMetadata } from '../lib/database.types'
 
 export interface LegacySnippet {
   snippetId: string
