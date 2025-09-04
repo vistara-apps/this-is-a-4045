@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useAuth } from '../contexts/AuthContext'
 import { Check, BookOpen, ArrowLeft } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'

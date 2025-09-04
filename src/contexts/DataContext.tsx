@@ -21,6 +21,9 @@ export interface LegacyCompilation {
   snippets: LegacySnippet[]
 }
 
+// Export as Compilation for backward compatibility
+export type Compilation = LegacyCompilation
+
 interface DataContextType {
   compilations: LegacyCompilation[]
   loading: boolean

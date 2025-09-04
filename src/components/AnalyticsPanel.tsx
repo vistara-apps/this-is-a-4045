@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Compilation } from '../contexts/DataContext'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { TrendingUp, FileText, Calendar, Target } from 'lucide-react'

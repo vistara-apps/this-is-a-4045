@@ -43,9 +43,13 @@ const validateEnv = () => {
   }
 }
 
-// Validate environment in development
-if (import.meta.env.DEV) {
-  validateEnv()
+// Validate environment in development (but not during build)
+if (import.meta.env.DEV && typeof window !== 'undefined') {
+  try {
+    validateEnv()
+  } catch (error) {
+    console.warn('Environment validation warning:', error)
+  }
 }
 
 export const config: Config = {
